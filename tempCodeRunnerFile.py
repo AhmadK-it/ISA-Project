@@ -1,0 +1,1 @@
+int(input('Enter number of Buildings: '))
