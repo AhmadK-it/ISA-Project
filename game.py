@@ -55,15 +55,20 @@ for t in tmp :
 for x in a :
     print('2','\n')
     x.printBoard()
+    # for y in x.resM:
+    #     print(y.mail,y.type)
     r = x.nextState(x)
     tt.append(r)
 alpha = list()
-print(tt)
+# print(tt)
 for ls in tt:
     for x in ls :
         print('3','\n')
+        # for y in x.resM:
+        #     print(y.mail,y.type)
         x.printBoard()
+        print('hi',x.board[1][3].struct.mail)
         s = x.nextState(x)
         alpha.append(s)
 
-print(alpha)
+# print(alpha)
