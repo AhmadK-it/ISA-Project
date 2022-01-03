@@ -40,10 +40,12 @@ I) the constructer (__init__)
 I) the constructer (__init__) 
 - initiat the structer's axis using the passed params 
 - initiat the struct type and mail for the first time using the default params
+
 II) setMail function -> never used 
 
 ### State Class (in state.py module)
 the class is created for keep track of the changes based on the game logic 
+
 #### Atributs 
 - board is a local copy of the current play board  
 - n is the number of rows (by default =4 assigned using the params in the structer )
@@ -54,43 +56,54 @@ the class is created for keep track of the changes based on the game logic
 - cost = 1 the cost for the current state (for using in algo)
 - carried =0 is a counter that stores the value of the current carried mails by the truck
 - waited =0 is a that stores the value of undelivered mails 
+
 #### Methods
 I) the constructer (__init__) 
 - initiat all values based on the passed params
 
 II) printBoard function used for visual representation for the board on the console
+
 III) move function
 - takes Cell coordinates and list (listStates) to append the new next created states 
 - based on the type of the Cell the algo starts the movement - it starts from all possible positions (all Cells without Truck and Building positions)
 - then check for keeping within the board coordinates
 - define the type of movement and call the right fuction 
 - append the new state created by the function to the list passed 
+
 IV) vMove / hMove function
 - Move the truck towards the specific free spot 
 - keep track of the types and save special structes before making changes to the right list
 - rebind the saved structers with the current board state before returning the final board state (adding the removed structers while moving)
 - return the final board
+
 V) nextState function
 - makes a deep copy of the current passed state 
 - finde the new next States from the current state by calling the move method 
 - returns the new next states list
+
 VI) checkPoints function
 - helper function for saving the passed over Post / Delevery points 
 - takes current struct's cell type (type) and cureent state (state) and valid lists 
 - append to specific values 
+
 VII) setCarriedMail function
 - count the un delevers mails and the only one that reseved by the truck ( mails carried by the truck subtracted from it the delvered mails to the delevered points)
 - takes state , struct and truck as params 
+
 VIII) setWaitedMail function
 - count the un delevers mails ( contains ones that not reseved by the truck) and ones also reseved by the truck ( mails carried by the truck subtracted from it the delvered mails to the delevered points)
 - make locale changes for each state alone based on the current board
 - takes state , struct and truck as params 
+
 IX) setDelevMail function
 - takes state , struct and truck as params 
 - make some local changes on the carried and waited lists and also set the right valus for the mail counter on the specific truck
+
 X) setParent
 - set the passed state as parent to the current state 
+
 XI) getRows / getCols
 - get the current board coordinates
+
 XII) isGoal 
 - meet the end state -> not done 
