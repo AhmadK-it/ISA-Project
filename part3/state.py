@@ -51,9 +51,6 @@ class State:
             state.board[row][col].struct.mail = state.board[row+1][col].struct.mail
             state.board[row+1][col].struct.type = '. '
             state.board[row+1][col].struct.mail = 0
-            truck = state.board[row][col].struct
-            state.setCarriedMail(state,struct, truck)
-            state.setWaitedMail(state)
         else:
             struct = cp.copy(state.board[row][col].struct)
             state.checkPoints(type, struct, state.resM, state.delevM)
@@ -61,20 +58,15 @@ class State:
             state.board[row][col].struct.mail = state.board[row-1][col].struct.mail
             state.board[row-1][col].struct.type = '. '
             state.board[row-1][col].struct.mail = 0
-            truck = state.board[row][col].struct
-            state.setCarriedMail(state,struct, truck)
-            state.setWaitedMail(state)
 
         for point in state.resM:
             if state.board[point.row][point.col].struct.type != 'T ':
                 state.board[point.row][point.col].struct.type = point.type
                 state.board[point.row][point.col].struct.mail = point.mail
-                print('point',point.type,point.mail)
         for point in state.delevM:
             if state.board[point.row][point.col].struct.type == '. ':
                 state.board[point.row][point.col].struct.type = point.type
                 state.board[point.row][point.col].struct.mail = point.mail
-                print('point',point.type,point.mail)
         return state
 
     def hMove(self,Dir,type,row,col,state):
@@ -85,9 +77,6 @@ class State:
             state.board[row][col].struct.mail = state.board[row][col-1].struct.mail
             state.board[row][col-1].struct.type = '. '
             state.board[row][col-1].struct.mail = 0
-            truck = state.board[row][col].struct
-            state.setCarriedMail(state,struct, truck)
-            state.setWaitedMail(state)
         else:
             struct = cp.copy(state.board[row][col].struct)
             state.checkPoints(type, struct, state.resM, state.delevM)
@@ -95,20 +84,14 @@ class State:
             state.board[row][col].struct.mail = state.board[row][col+1].struct.mail
             state.board[row][col+1].struct.type = '. '
             state.board[row][col+1].struct.mail = 0
-            truck = state.board[row][col].struct
-            state.setCarriedMail(state,struct, truck)
-            state.setWaitedMail(state)
-        
         for point in state.resM:
             if state.board[point.row][point.col].struct.type != 'T ':
                 state.board[point.row][point.col].struct.type = point.type
                 state.board[point.row][point.col].struct.mail = point.mail
-                print('point',point.type,point.mail)
         for point in state.delevM:
             if state.board[point.row][point.col].struct.type == '. ':
                 state.board[point.row][point.col].struct.type = point.type
                 state.board[point.row][point.col].struct.mail = point.mail
-                print('point',point.type,point.mail)
         return state
     
     def nextState(self,state):
@@ -153,9 +136,13 @@ class State:
                 struct = state.board[row][col].struct
                 if struct.type == 'P0'or struct.type == 'P1':
                     count+= struct.mail
-                    print('hi',struct.mail)
         state.waited = count + state.carried
-        
+        for row in range(n):
+            for col in range(m):
+                struct = state.board[row][col].struct
+                if struct.type == 'D0'or struct.type == 'D1':
+                    state.carried-= struct.mail
+
                     
     def setDelevMail(self, state, struct , truck ):
         truck.mail -= 1
