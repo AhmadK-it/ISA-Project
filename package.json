@@ -1,0 +1,14 @@
+{
+  "name": "isa_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "game.py",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "python3 game.py",
+    "dev": "python3 test.py"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
